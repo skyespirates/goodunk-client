@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Landing = () => {
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="mx-auto max-w-7xl">
       <div className="grid items-center grid-cols-2 gap-2 mt-12 mb-24 overflow-hidden h-96">
         <div>
           <h1 className="text-4xl">
@@ -22,7 +22,7 @@ const Landing = () => {
           />
         </div>
       </div>
-      <div className="">
+      <div className="max-w-7xl">
         <h1 className="text-4xl font-semibold text-center mb-9">
           Lakukan lebih dengan Goodunk
         </h1>

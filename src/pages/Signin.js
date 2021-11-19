@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 const Signin = () => {
   return (
-    <div className="max-w-5xl min-h-screen mx-auto ">
+    <div className="min-h-screen mx-auto max-w-7xl ">
       <div className="grid grid-cols-1 gap-2 mt-12 md:grid-cols-3">
         <div className="relative hidden col-span-2 md:block">
           <h1 className="text-4xl">
-            Memantau ketersediaan stok barang menjadi{" "}
+            Memantau ketersediaan stok barang <br /> menjadi{" "}
             <span className="font-semibold">lebih mudah</span>
           </h1>
           <div className="w-full h-full">

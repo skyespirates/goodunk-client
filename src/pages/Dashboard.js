@@ -1,12 +1,19 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import NewForm from "../components/NewForm";
+import Row from "../components/Row";
+import UpdateForm from "../components/UpdateForm";
 
 const Dashboard = () => {
+  const products = useSelector((state) => state.products.products);
+  const id = useSelector((state) => state.products.id);
+
   return (
-    <div className="max-w-5xl mx-auto">
-      <div className="grid min-h-screen gap-2 my-6 md:grid-cols-3">
-        <div className="p-4 bg-gray-200">
-          <div className="flex items-center mb-6 head">
-            <div className="relative w-24 h-24 overflow-hidden rounded-full">
+    <div className="">
+      <div className="min-h-screen dashboard">
+        <div className="py-4 bg-gray-100">
+          <div className="flex items-center px-4 mb-6 head">
+            <div className="relative w-12 h-12 overflow-hidden rounded-full">
               <img
                 className="absolute object-cover w-full h-full "
                 src="/assets/potrait.jpg"
@@ -15,7 +22,6 @@ const Dashboard = () => {
             </div>
             <div className="flex-1 ml-4">
               <h1 className="font-semibold">skyes07</h1>
-              <p>book shop</p>
             </div>
 
             <Link
@@ -26,7 +32,7 @@ const Dashboard = () => {
             </Link>
           </div>
           <div className="body">
-            <ul className="py-4 text-white bg-green-500">
+            <ul className="text-white bg-green-500 ">
               <li>
                 <Link
                   to="/new"
@@ -73,29 +79,36 @@ const Dashboard = () => {
             </ul>
           </div>
         </div>
-        <div className="p-4 bg-gray-200">
-          <div className="flex flex-col items-center justify-center w-40 h-40 mx-auto text-xl font-semibold text-center text-white bg-green-500">
-            <span className="text-xl font-semibold">Selasa</span>
-            <span className="font-semibold text-7xl">2</span>
-            <span className="text-xl font-semibold">Nov, 2021</span>
-          </div>
+        <div className="p-4 bg-gray-100">
+          <table className="block min-w-full border-collapse md:table">
+            <thead className="block md:table-header-group">
+              <tr className="absolute block border border-grey-500 md:border-none md:table-row -top-full md:top-auto -left-full md:left-auto md:relative ">
+                <th className="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">
+                  Nomor
+                </th>
+                <th className="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">
+                  Nama Produk
+                </th>
+                <th className="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">
+                  Harga
+                </th>
+                <th className="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">
+                  Jumlah
+                </th>
+                <th className="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">
+                  Aksi
+                </th>
+              </tr>
+            </thead>
+            <tbody className="block md:table-row-group">
+              {products.map((produk, index) => (
+                <Row key={index} nomor={index + 1} produk={produk} />
+              ))}
+            </tbody>
+          </table>
         </div>
-        <div className="p-4 bg-gray-200">
-          <h1 className="text-xl font-semibold">Aktivitas</h1>
-          <ul>
-            <li className="p-1 mb-2 bg-gray-300">
-              Lorem ipsum dolor sit amet.
-            </li>
-            <li className="p-1 mb-2 bg-gray-300">
-              Lorem ipsum dolor sit amet.
-            </li>
-            <li className="p-1 mb-2 bg-gray-300">
-              Lorem ipsum dolor sit amet.
-            </li>
-            <li className="p-1 mb-2 bg-gray-300">
-              Lorem ipsum dolor sit amet.
-            </li>
-          </ul>
+        <div className="py-2 bg-gray-100">
+          {id ? <UpdateForm /> : <NewForm />}
         </div>
       </div>
     </div>

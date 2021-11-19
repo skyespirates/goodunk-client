@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-gray-200">
-      <div className="flex items-center justify-between max-w-5xl py-2 mx-auto">
+    <nav className="">
+      <div className="flex items-center justify-between py-2 mx-auto max-w-7xl">
         <div className="flex">
           <Link to="/" className="relative h-8 text-white w-36">
             <img
