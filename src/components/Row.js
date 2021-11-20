@@ -14,15 +14,15 @@ const Row = ({ produk, nomor }) => {
         <span className="inline-block w-1/3 font-bold md:hidden">
           Nama Produk
         </span>
-        {produk.produk}
+        {produk.name}
       </td>
       <td className="block p-2 text-left md:border md:border-grey-500 md:table-cell">
         <span className="inline-block w-1/3 font-bold md:hidden">Harga</span>
-        {produk.harga}
+        {produk.price}
       </td>
       <td className="block p-2 text-left md:border md:border-grey-500 md:table-cell">
         <span className="inline-block w-1/3 font-bold md:hidden">Jumlah</span>
-        {produk.jumlah}
+        {produk.quantity}
       </td>
       <td className="block p-2 text-left md:border md:border-grey-500 md:table-cell">
         <span className="inline-block w-1/3 font-bold md:hidden">Aksi</span>

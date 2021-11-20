@@ -5,8 +5,8 @@ import Row from "../components/Row";
 import UpdateForm from "../components/UpdateForm";
 
 const Dashboard = () => {
-  const products = useSelector((state) => state.products.products);
-  const id = useSelector((state) => state.products.id);
+  const products = useSelector((state) => state.user.currentUser.products);
+  const id = useSelector((state) => state.product.id);
 
   return (
     <div className="">
@@ -102,7 +102,7 @@ const Dashboard = () => {
             </thead>
             <tbody className="block md:table-row-group">
               {products.map((produk, index) => (
-                <Row key={index} nomor={index + 1} produk={produk} />
+                <Row key={produk._id} nomor={index + 1} produk={produk} />
               ))}
             </tbody>
           </table>
