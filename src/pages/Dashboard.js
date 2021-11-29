@@ -1,17 +1,34 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import NewForm from "../components/NewForm";
 import Row from "../components/Row";
 import UpdateForm from "../components/UpdateForm";
+import { getProducts } from "../redux/apiCalls";
+import { resetPid } from "../redux/reducers/productReducer";
+import { getUserSuccess } from "../redux/reducers/userReducer";
 
 const Dashboard = () => {
-  const products = useSelector((state) => state.user.currentUser.products);
-  const id = useSelector((state) => state.product.id);
+  const products = useSelector((state) => state.product.products);
+  const pid = useSelector((state) => state.product.pid);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetPid());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const uid = JSON.parse(
+      JSON.parse(localStorage.getItem("persist:root")).user
+    ).currentUser._id;
+    dispatch(getUserSuccess(uid));
+    getProducts(dispatch, uid);
+  }, [dispatch]);
 
   return (
     <div className="">
       <div className="min-h-screen dashboard">
-        <div className="py-4 bg-gray-100">
+        <div className="py-4 pl-2 bg-gray-100">
           <div className="flex items-center px-4 mb-6 head">
             <div className="relative w-12 h-12 overflow-hidden rounded-full">
               <img
@@ -79,8 +96,8 @@ const Dashboard = () => {
             </ul>
           </div>
         </div>
-        <div className="p-4 bg-gray-100">
-          <table className="block min-w-full border-collapse md:table">
+        <div className="py-4 bg-gray-100 ">
+          <table className="block w-4/5 mx-auto border-collapse md:table">
             <thead className="block md:table-header-group">
               <tr className="absolute block border border-grey-500 md:border-none md:table-row -top-full md:top-auto -left-full md:left-auto md:relative ">
                 <th className="block p-2 font-bold text-left text-white bg-gray-600 md:border md:border-grey-500 md:table-cell">
@@ -107,8 +124,8 @@ const Dashboard = () => {
             </tbody>
           </table>
         </div>
-        <div className="py-2 bg-gray-100">
-          {id ? <UpdateForm /> : <NewForm />}
+        <div className="py-4 pr-2 bg-gray-100">
+          {pid ? <UpdateForm /> : <NewForm />}
         </div>
       </div>
     </div>

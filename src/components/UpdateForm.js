@@ -1,19 +1,21 @@
 import { useState } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { resetId, ubahProduk } from "../redux/reducers/productReducer";
+import { updateProduct } from "../redux/apiCalls";
+import { resetPid } from "../redux/reducers/productReducer";
 
 const UpdateForm = () => {
   const dispatch = useDispatch();
-  const produk = useSelector((state) => state.products.produk);
-  const [newProduk, setNewProduk] = useState(produk);
+  const product = useSelector((state) => state.product?.product);
+  // const pid = useSelector((state) => state.product?.pid);
+  const [newProduk, setNewProduk] = useState(product);
   const handleChange = (e) => {
     setNewProduk((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(ubahProduk(newProduk));
-    dispatch(resetId());
+    updateProduct(dispatch, newProduk);
+    dispatch(resetPid());
   };
 
   return (
@@ -25,11 +27,11 @@ const UpdateForm = () => {
             Nama Produk
           </label>
           <input
-            name="produk"
+            name="name"
             className="w-full px-2 py-1 border-2 border-green-500"
             id="produk"
             type="text"
-            placeholder={produk.produk}
+            placeholder={product?.name}
             onChange={handleChange}
           />
         </div>
@@ -38,11 +40,11 @@ const UpdateForm = () => {
             Harga
           </label>
           <input
-            name="harga"
+            name="price"
             className="w-full px-2 py-1 border-2 border-green-500"
             id="harga"
             type="number"
-            placeholder={produk.harga}
+            placeholder={product?.price}
             onChange={handleChange}
           />
         </div>
@@ -51,10 +53,10 @@ const UpdateForm = () => {
             <AiOutlineMinus />
           </button>
           <input
-            name="jumlah"
+            name="quantity"
             className="w-16 h-8 p-1 outline-none"
             type="number"
-            placeholder={produk.jumlah}
+            placeholder={product?.quantity}
             onChange={handleChange}
           />
           <button className="flex items-center justify-center w-8 h-8 text-white bg-green-500">
@@ -70,7 +72,7 @@ const UpdateForm = () => {
           </button>
         </div>
         <p
-          onClick={() => dispatch(resetId())}
+          onClick={() => dispatch(resetPid())}
           className="text-center text-gray-500 underline cursor-pointer hover:no-underline"
         >
           Batal

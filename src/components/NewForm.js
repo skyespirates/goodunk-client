@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { tambahProduk } from "../redux/reducers/productReducer";
+import { addProduct } from "../redux/apiCalls";
 
 const NewForm = () => {
+  const uid = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const [produk, setProduk] = useState({});
   const handleChange = (e) => {
@@ -11,7 +13,7 @@ const NewForm = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(tambahProduk(produk));
+    addProduct(dispatch, uid, produk);
   };
   return (
     <>
@@ -22,7 +24,7 @@ const NewForm = () => {
             Nama Produk
           </label>
           <input
-            name="produk"
+            name="name"
             className="w-full px-2 py-1 border-2 border-green-500"
             id="produk"
             type="text"
@@ -34,7 +36,7 @@ const NewForm = () => {
             Harga
           </label>
           <input
-            name="harga"
+            name="price"
             className="w-full px-2 py-1 border-2 border-green-500"
             id="harga"
             type="number"
@@ -46,7 +48,7 @@ const NewForm = () => {
             <AiOutlineMinus />
           </button>
           <input
-            name="jumlah"
+            name="quantity"
             className="w-16 h-8 p-1 outline-none"
             type="number"
             onChange={handleChange}
@@ -56,7 +58,7 @@ const NewForm = () => {
           </button>
         </div>
         <div className="flex">
-          <button className="flex-1 py-2 text-white bg-green-500">
+          <button type="submit" className="flex-1 py-2 text-white bg-green-500">
             Simpan
           </button>
         </div>

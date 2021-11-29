@@ -3,48 +3,39 @@ const { createSlice } = require("@reduxjs/toolkit");
 const productSlice = createSlice({
   name: "product",
   initialState: {
-    products: [
-      {
-        produk: "teh gelas",
-        harga: 1000,
-        jumlah: 120,
-      },
-      {
-        produk: "mie sedap",
-        harga: 3000,
-        jumlah: 60,
-      },
-      {
-        produk: "pop mie",
-        harga: 4000,
-        jumlah: 30,
-      },
-      {
-        produk: "indomie",
-        harga: 2500,
-        jumlah: 100,
-      },
-    ],
-    id: null,
-    produk: {},
+    products: [],
+    pid: null,
+    product: {},
     error: false,
   },
   reducers: {
-    hapusProduk: (state, action) => {
-      state.products.splice(action.payload - 1, 1);
+    getProductsSuccess: (state, action) => {
+      state.products = action.payload;
     },
-    tambahProduk: (state, action) => {
+    deleteProductSuccess: (state, action) => {
+      state.products.splice(
+        state.products.findIndex((product) => product._id === action.payload),
+        1
+      );
+    },
+    addProductSuccess: (state, action) => {
       state.products.push(action.payload);
     },
-    produkTerpilih: (state, action) => {
-      state.id = action.payload;
-      state.produk = state.products[state.id - 1];
+    selectedProduct: (state, action) => {
+      state.pid = action.payload;
+      state.product =
+        state.products[
+          state.products.findIndex((product) => action.payload === product._id)
+        ];
     },
-    ubahProduk: (state, action) => {
-      state.products.splice(state.id - 1, 1, action.payload);
+    updateProductSuccess: (state, action) => {
+      state.products[
+        state.products.findIndex((item) => item._id === action.payload._id)
+      ] = action.payload;
     },
-    resetId: (state) => {
-      state.id = null;
+    resetPid: (state) => {
+      state.pid = null;
+      state.product = {};
     },
   },
 });
@@ -52,10 +43,11 @@ const productSlice = createSlice({
 const { actions, reducer } = productSlice;
 
 export const {
-  hapusProduk,
-  tambahProduk,
-  ubahProduk,
-  produkTerpilih,
-  resetId,
+  getProductsSuccess,
+  deleteProductSuccess,
+  addProductSuccess,
+  updateProductSuccess,
+  selectedProduct,
+  resetPid,
 } = actions;
 export default reducer;
