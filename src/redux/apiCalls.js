@@ -12,7 +12,7 @@ import {
   actionSuccess,
 } from "./reducers/userReducer";
 
-const BASE_URL = "http://localhost:4000";
+const BASE_URL = "https://goodunk.herokuapp.com";
 
 export const register = async (dispatch, user) => {
   dispatch(actionStart());

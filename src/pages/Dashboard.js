@@ -11,6 +11,7 @@ import { getUserSuccess } from "../redux/reducers/userReducer";
 const Dashboard = () => {
   const products = useSelector((state) => state.product.products);
   const pid = useSelector((state) => state.product.pid);
+  const user = useSelector((state) => state.user.currentUser.username);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,7 +39,7 @@ const Dashboard = () => {
               />
             </div>
             <div className="flex-1 ml-4">
-              <h1 className="font-semibold">skyes07</h1>
+              <h1 className="font-semibold">{user}</h1>
             </div>
 
             <Link
@@ -83,14 +84,6 @@ const Dashboard = () => {
                 >
                   <span className="mr-3 material-icons">description</span>Tambah
                   Data Order
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/landing"
-                  className="flex items-center px-3 py-2 cursor-pointer hover:bg-green-600"
-                >
-                  <span className="mr-3 material-icons">logout</span>Logout
                 </Link>
               </li>
             </ul>
